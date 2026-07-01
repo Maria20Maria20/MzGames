@@ -6,8 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/MzGames/Scenes/Bootstrap.unity
+    guid: c843ba08d9334084c8f953f5e7c0a3f5
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 55ec84931bfc5ce49b0621fc4a990448, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
