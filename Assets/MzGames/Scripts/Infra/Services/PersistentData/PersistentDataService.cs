@@ -1,4 +1,4 @@
-﻿using MzGames.Scripts.Simulation;
+﻿using MzGames.Scripts.Data;
 
 namespace MzGames.Scripts.Infra.Services.PersistentData
 {

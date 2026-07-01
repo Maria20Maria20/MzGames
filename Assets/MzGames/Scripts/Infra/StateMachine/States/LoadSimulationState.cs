@@ -1,7 +1,7 @@
+using MzGames.Scripts.Data;
 using MzGames.Scripts.Infra.Factorises.Interfaces;
 using MzGames.Scripts.Infra.SceneManagement;
 using MzGames.Scripts.Infra.StateMachine.States.Interfaces;
-using MzGames.Scripts.Simulation;
 
 namespace MzGames.Scripts.Infra.StateMachine.States
 {
