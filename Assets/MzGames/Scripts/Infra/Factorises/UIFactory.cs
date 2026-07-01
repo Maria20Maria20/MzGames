@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using MzGames.Scripts.Infra.AssetManagement;
 using MzGames.Scripts.Infra.Factorises.Interfaces;
-using MzGames.Scripts.Meta;
 using MzGames.Scripts.Meta.HUD;
 using MzGames.Scripts.Meta.Menu;
 using UnityEngine;
@@ -13,7 +12,6 @@ namespace MzGames.Scripts.Infra.Factorises
     public class UIFactory : IUIFactory
     {
         private const string MenuAddress = "Menu";
-        private const string LoadingScreenAddress = "LoadingScreen";
         private const string UIRootAddress = "UIRoot";
         private const string HUDAddress = "HUD";
 
@@ -21,16 +19,12 @@ namespace MzGames.Scripts.Infra.Factorises
         private readonly IObjectResolver _objectResolver;
 
         private GameObject _menuPrefab;
-        private GameObject _loadingScreenPrefab;
         private GameObject _uiRootPrefab;
         private GameObject _hudPrefab;
 
         private MenuController _menu;
-        private LoadingScreen _loadingScreen;
         private Canvas _uiRoot;
         private HUDController _hud;
-
-        public LoadingScreen LoadingScreen => _loadingScreen;
 
         public UIFactory(IAssetProvider assetProvider, IObjectResolver objectResolver)
         {
@@ -40,7 +34,6 @@ namespace MzGames.Scripts.Infra.Factorises
 
         public async Task WarmUp()
         {
-            _loadingScreenPrefab = await _assetProvider.Load<GameObject>(LoadingScreenAddress);
             _uiRootPrefab = await _assetProvider.Load<GameObject>(UIRootAddress);
             _hudPrefab = await _assetProvider.Load<GameObject>(HUDAddress);
         }
@@ -56,19 +49,6 @@ namespace MzGames.Scripts.Infra.Factorises
             var instance = _objectResolver.Instantiate(_menuPrefab, uiRoot.transform);
             _menu = instance.GetComponent<MenuController>();
             return _menu;
-        }
-
-        public async Task<LoadingScreen> GetOrCreateLoadingScreen()
-        {
-            if (_loadingScreen != null)
-                return _loadingScreen;
-
-            _loadingScreenPrefab ??= await _assetProvider.Load<GameObject>(LoadingScreenAddress);
-
-            var instance = _objectResolver.Instantiate(_loadingScreenPrefab);
-            Object.DontDestroyOnLoad(instance); 
-            _loadingScreen = instance.GetComponent<LoadingScreen>();
-            return _loadingScreen;
         }
 
         public async Task<Canvas> GetOrCreateUIRoot()
@@ -125,17 +105,9 @@ namespace MzGames.Scripts.Infra.Factorises
                 _uiRoot = null;
             }
 
-            if (_loadingScreen != null)
-            {
-                Object.Destroy(_loadingScreen.gameObject);
-                _loadingScreen = null;
-            }
-
-            _assetProvider.Release(LoadingScreenAddress);
             _assetProvider.Release(UIRootAddress);
             _assetProvider.Release(HUDAddress);
 
-            _loadingScreenPrefab = null;
             _uiRootPrefab = null;
             _hudPrefab = null;
         }
