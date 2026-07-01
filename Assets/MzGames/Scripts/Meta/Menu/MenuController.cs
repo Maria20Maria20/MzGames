@@ -5,11 +5,6 @@ using UnityEngine.UI;
 
 namespace MzGames.Scripts.Meta.Menu
 {
-    /// <summary>
-    /// Start / new-simulation menu view: N / M / V sliders + New simulation / Continue
-    /// buttons. Raises events that MenuState listens to. Spawned through IUIFactory.
-    /// The slider/button references are wired on the prefab.
-    /// </summary>
     public class MenuController : MonoBehaviour
     {
         [SerializeField] private Slider gridSlider;   // N
