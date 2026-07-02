@@ -7,7 +7,7 @@ namespace MzGames.Scripts.Infra.Factories.Interfaces
 {
     public interface IUIFactory
     {
-        Task WarmUp();
+        Task<bool> WarmUp();
         Task<MenuController> GetOrCreateMenu();
         Task<Canvas> GetOrCreateUIRoot();
         Task<HUDController> GetOrCreateHUD();

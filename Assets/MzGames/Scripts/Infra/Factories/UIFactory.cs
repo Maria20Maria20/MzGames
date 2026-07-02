@@ -32,10 +32,13 @@ namespace MzGames.Scripts.Infra.Factories
             _objectResolver = objectResolver;
         }
 
-        public async Task WarmUp()
+        public async Task<bool> WarmUp()
         {
             _uiRootPrefab = await _assetProvider.Load<GameObject>(UIRootAddress);
             _hudPrefab = await _assetProvider.Load<GameObject>(HUDAddress);
+            _menuPrefab = await  _assetProvider.Load<GameObject>(MenuAddress);
+            
+            return _uiRootPrefab != null && _hudPrefab != null && _menuPrefab != null;
         }
 
         public async Task<MenuController> GetOrCreateMenu()
