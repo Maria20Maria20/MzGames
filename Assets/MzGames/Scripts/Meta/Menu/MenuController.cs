@@ -1,5 +1,6 @@
 using System;
 using MzGames.Scripts.Data;
+using MzGames.Scripts.Simulation;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,10 @@ namespace MzGames.Scripts.Meta.Menu
         [SerializeField] private Slider speedSlider;  // V
         [SerializeField] private Button newButton;
         [SerializeField] private Button continueButton;
+        [SerializeField] private Text maxCount;
+        [SerializeField] private Text currentGrid;
+        [SerializeField] private Text currentCount;
+        [SerializeField] private Text currentSpeed;
 
         public event Action<SimulationConfig> NewSimulationRequested;
         public event Action ContinueRequested;
@@ -24,7 +29,15 @@ namespace MzGames.Scripts.Meta.Menu
                 continueButton.interactable = continueAvailable;
 
             if (gridSlider != null)
-                gridSlider.onValueChanged.AddListener(_ => ClampCountToGrid());
+                gridSlider.onValueChanged.AddListener(value =>
+                {
+                    ClampCountToGrid();
+                    currentGrid.text = "Grid " + (int)value;
+                });
+            if (countSlider != null)
+                countSlider.onValueChanged.AddListener(value => currentCount.text = "Count" + (int)value);
+            if (speedSlider != null)
+                speedSlider.onValueChanged.AddListener(value => currentSpeed.text = "Speed " + value);
             if (newButton != null)
                 newButton.onClick.AddListener(RaiseNew);
             if (continueButton != null)
@@ -39,6 +52,7 @@ namespace MzGames.Scripts.Meta.Menu
                 gridSlider.minValue = SimulationConfig.MinGrid;
                 gridSlider.maxValue = SimulationConfig.MaxGrid;
                 gridSlider.value = defaults.GridSize;
+                currentGrid.text = "Grid " + defaults.GridSize;
             }
 
             if (speedSlider != null)
@@ -47,6 +61,7 @@ namespace MzGames.Scripts.Meta.Menu
                 speedSlider.minValue = SimulationConfig.MinSpeed;
                 speedSlider.maxValue = SimulationConfig.MaxSpeed;
                 speedSlider.value = defaults.Speed;
+                currentSpeed.text = "Speed " + defaults.Speed;
             }
 
             if (countSlider != null)
@@ -54,6 +69,7 @@ namespace MzGames.Scripts.Meta.Menu
                 countSlider.wholeNumbers = true;
                 countSlider.minValue = 0;
                 countSlider.value = defaults.Count;
+                currentCount.text = "Count" + defaults.Count;
             }
 
             ClampCountToGrid();
@@ -66,6 +82,7 @@ namespace MzGames.Scripts.Meta.Menu
                 return;
 
             countSlider.maxValue = SimulationConfig.MaxCount((int)gridSlider.value);
+            maxCount.text = SimulationConfig.MaxCount((int)gridSlider.value).ToString();
         }
 
         private void RaiseNew() => NewSimulationRequested?.Invoke(ReadConfig());
