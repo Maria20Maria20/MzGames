@@ -19,8 +19,8 @@ namespace MzGames.Scripts.Data
 
         public static SimulationConfig Default => new SimulationConfig
         {
-            GridSize = 16,
-            Count = 16,
+            GridSize = 2,
+            Count = 1,
             Speed = 5f
         }.Validated();
 
