@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using MzGames.Scripts.Infra.Factorises;
+using MzGames.Scripts.Infra.Factories;
 using MzGames.Scripts.Infra.StateMachine.States;
 using MzGames.Scripts.Infra.StateMachine.States.Interfaces;
 using VContainer.Unity;

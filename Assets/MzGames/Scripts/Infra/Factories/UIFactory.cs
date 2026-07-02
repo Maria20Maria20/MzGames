@@ -1,13 +1,13 @@
 using System.Threading.Tasks;
 using MzGames.Scripts.Infra.AssetManagement;
-using MzGames.Scripts.Infra.Factorises.Interfaces;
+using MzGames.Scripts.Infra.Factories.Interfaces;
 using MzGames.Scripts.Meta.HUD;
 using MzGames.Scripts.Meta.Menu;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace MzGames.Scripts.Infra.Factorises
+namespace MzGames.Scripts.Infra.Factories
 {
     public class UIFactory : IUIFactory
     {

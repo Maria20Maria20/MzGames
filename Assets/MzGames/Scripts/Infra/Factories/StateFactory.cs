@@ -1,7 +1,7 @@
 ﻿using MzGames.Scripts.Infra.StateMachine.States.Interfaces;
 using VContainer;
 
-namespace MzGames.Scripts.Infra.Factorises
+namespace MzGames.Scripts.Infra.Factories
 {
     public class StateFactory
     {

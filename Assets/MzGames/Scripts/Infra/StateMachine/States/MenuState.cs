@@ -1,5 +1,5 @@
 using MzGames.Scripts.Data;
-using MzGames.Scripts.Infra.Factorises.Interfaces;
+using MzGames.Scripts.Infra.Factories.Interfaces;
 using MzGames.Scripts.Infra.SceneManagement;
 using MzGames.Scripts.Infra.Services.PersistentData;
 using MzGames.Scripts.Infra.StateMachine.States.Interfaces;

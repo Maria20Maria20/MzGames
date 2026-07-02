@@ -3,7 +3,7 @@ using MzGames.Scripts.Meta.HUD;
 using MzGames.Scripts.Meta.Menu;
 using UnityEngine;
 
-namespace MzGames.Scripts.Infra.Factorises.Interfaces
+namespace MzGames.Scripts.Infra.Factories.Interfaces
 {
     public interface IUIFactory
     {
