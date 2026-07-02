@@ -3,6 +3,7 @@ using MzGames.Scripts.Data;
 using MzGames.Scripts.Infra.AssetManagement;
 using MzGames.Scripts.Infra.Factories.Interfaces;
 using MzGames.Scripts.Simulation;
+using MzGames.Scripts.Simulation.Interfaces;
 using MzGames.Scripts.Simulation.View;
 using UnityEngine;
 
