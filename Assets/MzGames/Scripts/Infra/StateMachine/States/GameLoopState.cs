@@ -1,26 +1,40 @@
-﻿using MzGames.Scripts.Infra.StateMachine.States.Interfaces;
+using MzGames.Scripts.Data;
+using MzGames.Scripts.Infra.Factories.Interfaces;
+using MzGames.Scripts.Infra.StateMachine.States.Interfaces;
+using MzGames.Scripts.Simulation;
 using UnityEngine;
 
 namespace MzGames.Scripts.Infra.StateMachine.States
 {
-    public class GameLoopState: IState
+    public class GameLoopState : IPayLoadedState<SimulationConfig>
     {
-        public GameLoopState()
+        private readonly ISimulationFactory _simulationFactory;
+        private readonly IEntityFactory _entityFactory;
+
+        private SimulationController _simulation;
+
+        public GameLoopState(ISimulationFactory simulationFactory, IEntityFactory entityFactory)
+        {
+            _simulationFactory = simulationFactory;
+            _entityFactory = entityFactory;
+        }
+
+        public void BeforeEnter(SimulationConfig payLoad)
         {
         }
-        public void Enter()
+
+        public async void Enter(SimulationConfig config)
         {
-            Application.quitting += OnExitGame;
+            await _entityFactory.WarmUp();
+            await _simulationFactory.WarmUp();
+
+            _simulation = await _simulationFactory.Create(config);
         }
 
         public void Exit()
         {
-            
-        }
-
-        private void OnExitGame()
-        {
-            Application.quitting -= OnExitGame;
+            _simulation?.Dispose();
+            _simulation = null;
         }
     }
 }

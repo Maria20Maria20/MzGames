@@ -1,5 +1,5 @@
 using MzGames.Scripts.Data;
-using MzGames.Scripts.Infra.Factorises.Interfaces;
+using MzGames.Scripts.Infra.Factories.Interfaces;
 using MzGames.Scripts.Infra.SceneManagement;
 using MzGames.Scripts.Infra.StateMachine.States.Interfaces;
 
@@ -30,14 +30,11 @@ namespace MzGames.Scripts.Infra.StateMachine.States
             await _uiFactory.GetOrCreateUIRoot();
             await _uiFactory.GetOrCreateHUD();
 
-            // TODO (milestone 2): build the simulation world from `config` (grid, animals, food).
-
-            _gameStateMachine.Enter<GameLoopState>();
+            _gameStateMachine.Enter<GameLoopState, SimulationConfig>(config);
         }
 
         public void Exit()
         {
-            // HUD / UI root persist into GameLoopState — nothing to tear down here.
         }
     }
 }

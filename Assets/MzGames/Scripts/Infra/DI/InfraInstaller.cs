@@ -1,11 +1,13 @@
 using MzGames.Scripts.Infra.AssetManagement;
-using MzGames.Scripts.Infra.Factorises;
-using MzGames.Scripts.Infra.Factorises.Interfaces;
+using MzGames.Scripts.Infra.Factories;
+using MzGames.Scripts.Infra.Factories.Interfaces;
 using MzGames.Scripts.Infra.SceneManagement;
 using MzGames.Scripts.Infra.Services.PersistentData;
 using MzGames.Scripts.Infra.Services.SaveLoad;
 using MzGames.Scripts.Infra.StateMachine;
 using MzGames.Scripts.Infra.StateMachine.States;
+using MzGames.Scripts.Simulation;
+using MzGames.Scripts.Simulation.Interfaces;
 using VContainer;
 using VContainer.Unity;
 
@@ -31,6 +33,10 @@ namespace MzGames.Scripts.Infra.DI
             builder.Register<IUIFactory, UIFactory>(Lifetime.Singleton);
 
             builder.Register<SceneLoader>(Lifetime.Singleton);
+
+            builder.Register<ISimulationClock, SimulationClock>(Lifetime.Singleton);
+            builder.Register<IEntityFactory, EntityFactory>(Lifetime.Singleton);
+            builder.Register<ISimulationFactory, SimulationFactory>(Lifetime.Singleton);
         }
 
         private void RegisterStateMachine(IContainerBuilder builder)
