@@ -55,7 +55,7 @@ namespace MzGames.Scripts.Simulation.View
         private void OnFoodEaten(Vector2 position) =>
             _entityFactory.SpawnEatEffect(ToWorld(position));
 
-        private static Vector3 ToWorld(Vector2 p) => new Vector3(p.x, EntityY, p.y);
+        private Vector3 ToWorld(Vector2 p) => new Vector3(p.x, EntityY, p.y);
 
         public void Dispose() => _world.FoodEaten -= OnFoodEaten;
     }

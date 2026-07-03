@@ -12,8 +12,8 @@ namespace MzGames.Scripts.Infra.Factories
         private const string EatEffectAddress = "EatEffect";
         private const float EffectLifetime = 1f;
 
-        private static readonly int BaseColorId = Shader.PropertyToID("_BaseColor"); // URP
-        private static readonly int ColorId = Shader.PropertyToID("_Color");         // Standard / legacy
+        private readonly int _baseColorId = Shader.PropertyToID("_BaseColor"); // URP
+        private readonly int _colorId = Shader.PropertyToID("_Color");         // Standard / legacy
 
         private readonly IAssetProvider _assetProvider;
         private readonly MaterialPropertyBlock _mpb = new MaterialPropertyBlock();
@@ -74,8 +74,8 @@ namespace MzGames.Scripts.Infra.Factories
                 return;
 
             renderer.GetPropertyBlock(_mpb);
-            _mpb.SetColor(BaseColorId, color); 
-            _mpb.SetColor(ColorId, color);
+            _mpb.SetColor(_baseColorId, color); 
+            _mpb.SetColor(_colorId, color);
             renderer.SetPropertyBlock(_mpb);
         }
     }

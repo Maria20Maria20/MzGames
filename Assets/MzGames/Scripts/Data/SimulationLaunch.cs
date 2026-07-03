@@ -1,6 +1,6 @@
 namespace MzGames.Scripts.Data
 {
-    public   class SimulationLaunch
+    public class SimulationLaunch
     {
         public SimulationConfig Config;
         public SimulationSnapshot Snapshot;

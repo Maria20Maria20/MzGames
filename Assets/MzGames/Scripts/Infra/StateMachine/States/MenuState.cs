@@ -35,7 +35,7 @@ namespace MzGames.Scripts.Infra.StateMachine.States
             _simulationSaveService = simulationSaveService;
         }
 
-        private static string SettingsPath => Path.Combine(Application.persistentDataPath, SettingsFileName);
+        private string SettingsPath => Path.Combine(Application.persistentDataPath, SettingsFileName);
 
         public async void Enter()
         {
