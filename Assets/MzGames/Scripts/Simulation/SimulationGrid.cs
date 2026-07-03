@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace MzGames.Scripts.Simulation
 {
-    public sealed class SimulationGrid
+    public class SimulationGrid
     {
         public int Size { get; }
 

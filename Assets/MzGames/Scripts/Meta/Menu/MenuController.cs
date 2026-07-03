@@ -68,6 +68,7 @@ namespace MzGames.Scripts.Meta.Menu
             {
                 countSlider.wholeNumbers = true;
                 countSlider.minValue = 0;
+                countSlider.maxValue = SimulationConfig.MaxCount(defaults.GridSize);
                 countSlider.value = defaults.Count;
                 currentCount.text = "Count" + defaults.Count;
             }
@@ -75,7 +76,6 @@ namespace MzGames.Scripts.Meta.Menu
             ClampCountToGrid();
         }
 
-        // M ≤ N²/2 — keep the count slider's max in sync with the chosen grid size.
         private void ClampCountToGrid()
         {
             if (countSlider == null || gridSlider == null)

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace MzGames.Scripts.Simulation
 {
-    public sealed class SpatialHash
+    public class SpatialHash
     {
         private readonly SimulationGrid _grid;
         private readonly int[] _head;

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace MzGames.Scripts.Simulation.View
 {
-    public sealed class SimulationView : System.IDisposable
+    public class SimulationView : System.IDisposable
     {
         private const float EntityY = 0.5f; 
 

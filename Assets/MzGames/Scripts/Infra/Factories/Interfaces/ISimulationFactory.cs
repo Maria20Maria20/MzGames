@@ -8,6 +8,7 @@ namespace MzGames.Scripts.Infra.Factories.Interfaces
     {
         Task<bool> WarmUp();
         Task<SimulationController> Create(SimulationConfig config);
+        Task<SimulationController> Restore(SimulationSnapshot snapshot);
         void Cleanup();
     }
 }

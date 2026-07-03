@@ -1,24 +1,28 @@
+using MzGames.Scripts.Infra.Services.SaveLoad;
 using MzGames.Scripts.Simulation.Interfaces;
 using MzGames.Scripts.Simulation.View;
 using UnityEngine;
 
 namespace MzGames.Scripts.Simulation
 {
-    public sealed class SimulationRunner : MonoBehaviour
+    public class SimulationRunner : MonoBehaviour
     {
-        private const float MaxUnitsPerStep = SimulationWorld.EatRadius; 
-        private const int MaxSubSteps = 16;         
+        private const float MaxUnitsPerStep = SimulationWorld.EatRadius;
+        private const int MaxSubSteps = 16;
 
         private SimulationWorld _world;
         private SimulationView _view;
         private ISimulationClock _clock;
-        private float _speed; 
+        private ISimulationSaveService _saveService;
+        private float _speed;
 
-        public void Initialize(SimulationWorld world, SimulationView view, ISimulationClock clock, float speed)
+        public void Initialize(SimulationWorld world, SimulationView view, ISimulationClock clock, float speed,
+            ISimulationSaveService saveService)
         {
             _world = world;
             _view = view;
             _clock = clock;
+            _saveService = saveService;
             _speed = Mathf.Max(0.0001f, speed);
         }
 
@@ -39,6 +43,22 @@ namespace MzGames.Scripts.Simulation
             }
 
             _view.SyncTransforms();
+        }
+
+        private void OnApplicationPause(bool paused)
+        {
+            if (paused)
+                Save();
+        }
+
+        private void OnApplicationQuit() => Save();
+
+        private void Save()
+        {
+            if (_world == null || _saveService == null)
+                return;
+
+            _saveService.Save(_world.Capture());
         }
     }
 }

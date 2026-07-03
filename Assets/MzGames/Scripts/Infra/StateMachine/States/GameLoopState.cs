@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace MzGames.Scripts.Infra.StateMachine.States
 {
-    public class GameLoopState : IPayLoadedState<SimulationConfig>
+    public class GameLoopState : IPayLoadedState<SimulationLaunch>
     {
         private readonly ISimulationFactory _simulationFactory;
         private readonly IEntityFactory _entityFactory;
@@ -19,22 +19,23 @@ namespace MzGames.Scripts.Infra.StateMachine.States
             _entityFactory = entityFactory;
         }
 
-        public void BeforeEnter(SimulationConfig payLoad)
-        {
-        }
-
-        public async void Enter(SimulationConfig config)
+        public async void Enter(SimulationLaunch launch)
         {
             await _entityFactory.WarmUp();
             await _simulationFactory.WarmUp();
 
-            _simulation = await _simulationFactory.Create(config);
+            _simulation = launch.IsResume
+                ? await _simulationFactory.Restore(launch.Snapshot)
+                : await _simulationFactory.Create(launch.Config);
         }
 
         public void Exit()
         {
             _simulation?.Dispose();
             _simulation = null;
+
+            _simulationFactory.Cleanup();
+            _entityFactory.Cleanup();
         }
     }
 }

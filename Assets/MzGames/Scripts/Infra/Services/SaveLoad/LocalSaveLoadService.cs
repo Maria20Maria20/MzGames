@@ -5,7 +5,7 @@ using static Newtonsoft.Json.JsonConvert;
 
 namespace MzGames.Scripts.Infra.Services.SaveLoad
 {
-    public class LocalSaveLoadService : ISaveLoadService
+    public class SaveLoadService : ISaveLoadService
     {
         public void WriteToFile<T>(string path, T data)
         {

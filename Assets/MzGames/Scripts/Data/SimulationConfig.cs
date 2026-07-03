@@ -26,10 +26,13 @@ namespace MzGames.Scripts.Data
 
         public SimulationConfig Validated()
         {
-            GridSize = Mathf.Clamp(GridSize, MinGrid, MaxGrid);
-            Speed = Mathf.Clamp(Speed, MinSpeed, MaxSpeed);
-            Count = Mathf.Clamp(Count, 0, MaxCount(GridSize));
-            return this;
+            int gridSize = Mathf.Clamp(GridSize, MinGrid, MaxGrid);
+            return new SimulationConfig
+            {
+                GridSize = gridSize,
+                Speed = Mathf.Clamp(Speed, MinSpeed, MaxSpeed),
+                Count = Mathf.Clamp(Count, 0, MaxCount(gridSize))
+            };
         }
     }
 }

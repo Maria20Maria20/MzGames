@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace MzGames.Scripts.Simulation
 {
-    public sealed class Food
+    public class Food
     {
         public int Cell;
         public Vector2 Position;

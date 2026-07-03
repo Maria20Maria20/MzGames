@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace MzGames.Scripts.Simulation
 {
-    public sealed class Animal
+    public class Animal
     {
         public Vector2 Position;
         public Vector2 Velocity;

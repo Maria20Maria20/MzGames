@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace MzGames.Scripts.Infra.Factories
 {
-    public sealed class EntityFactory : IEntityFactory
+    public class EntityFactory : IEntityFactory
     {
         private const string AnimalAddress = "Animal";
         private const string FoodAddress = "Food";

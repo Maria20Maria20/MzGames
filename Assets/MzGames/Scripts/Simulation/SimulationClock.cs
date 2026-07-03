@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace MzGames.Scripts.Simulation
 {
-    public sealed class SimulationClock : ISimulationClock
+    public class SimulationClock : ISimulationClock
     {
         public const float MinSpeed = 0f;
         public const float MaxSpeed = 1000f;

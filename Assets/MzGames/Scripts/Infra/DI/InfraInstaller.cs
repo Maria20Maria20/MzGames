@@ -24,7 +24,8 @@ namespace MzGames.Scripts.Infra.DI
         private void RegisterServices(IContainerBuilder builder)
         {
             builder.Register<IPersistentDataService, PersistentDataService>(Lifetime.Singleton);
-            builder.Register<ISaveLoadService, LocalSaveLoadService>(Lifetime.Singleton);
+            builder.Register<ISaveLoadService, SaveLoadService>(Lifetime.Singleton);
+            builder.Register<ISimulationSaveService, SimulationSaveService>(Lifetime.Singleton);
 
             builder.Register<AssetProvider>(Lifetime.Singleton)
                 .As<IAssetProvider>()

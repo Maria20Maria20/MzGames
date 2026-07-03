@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MzGames.Scripts.Simulation
 {
-    public sealed class SimulationWorld
+    public class SimulationWorld
     {
         private const float Perception = 1.0f;
         private const float SeparationWeight = 1.2f;
@@ -61,6 +61,43 @@ namespace MzGames.Scripts.Simulation
                 _foodCells[cell] = true;
                 _foods[i] = new Food(cell, _grid.CellCenter(cell));
             }
+        }
+
+        public void Load(SimulationSnapshot snapshot)
+        {
+            int m = snapshot.Animals.Length;
+            _animals = new Animal[m];
+            _foods = new Food[m];
+            _foodCells = new bool[_grid.CellCount];
+
+            for (int i = 0; i < m; i++)
+            {
+                AnimalSnapshot a = snapshot.Animals[i];
+                _animals[i] = new Animal(new Vector2(a.X, a.Z)) { Velocity = new Vector2(a.VX, a.VZ) };
+
+                FoodSnapshot f = snapshot.Foods[i];
+                int cell = Mathf.Clamp(f.Cell, 0, _grid.CellCount - 1);
+                _foodCells[cell] = true;
+                _foods[i] = new Food(cell, new Vector2(f.X, f.Z));
+            }
+        }
+
+        public SimulationSnapshot Capture()
+        {
+            int m = _animals?.Length ?? 0;
+            var animals = new AnimalSnapshot[m];
+            var foods = new FoodSnapshot[m];
+
+            for (int i = 0; i < m; i++)
+            {
+                Animal a = _animals[i];
+                animals[i] = new AnimalSnapshot { X = a.Position.x, Z = a.Position.y, VX = a.Velocity.x, VZ = a.Velocity.y };
+
+                Food f = _foods[i];
+                foods[i] = new FoodSnapshot { Cell = f.Cell, X = f.Position.x, Z = f.Position.y };
+            }
+
+            return new SimulationSnapshot { Config = _config, Animals = animals, Foods = foods };
         }
 
         public void Tick(float dt)
